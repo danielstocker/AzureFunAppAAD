@@ -1,12 +1,9 @@
-﻿using Microsoft.IdentityModel.Clients.ActiveDirectory;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
 
-namespace FunAppAdClient
+namespace FunAppAdClientCore
 {
     class Program
     {
@@ -21,13 +18,13 @@ namespace FunAppAdClient
             string resource = "0fd86ddc-c6b2-4cd7-b542-2b1ce11e5100";  //Application id of the server AD app
             string clientId = "51bdeb1e-46cc-4f3c-98cd-4ac1eb32d821"; //Application id of the client AD app
             string clientSecret = @"-----"; //Secret key from the client AD app
-          
+
             try
             {
                 AuthenticationContext authContext = new AuthenticationContext(authority);
                 ClientCredential clientCred = new ClientCredential(clientId, clientSecret);
 
-                
+
                 var token = await authContext.AcquireTokenAsync(resource, clientCred);
                 var authHeader = token.CreateAuthorizationHeader();
                 HttpClient client = new HttpClient();
